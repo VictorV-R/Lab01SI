@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -13,7 +14,70 @@ public class Lab01 {
         Map<Character, Integer> tablaFrecuencias = frecuencias(poemaPrePro);
         imprimirTablaFrecuencias(tablaFrecuencias);
         imprimirCaracteresDeMayorFrec(tablaFrecuencias);
+        metodoKasiski(poemaPrePro);
+        System.out.println("Poema UNICODE: " + cambiarCarateresUnicode(poemaPrePro));
+        System.out.println("Peoma Alfabeto Nuevo: " + alfabetoNuevo(poemaPrePro));
 
+    }
+
+    private static String alfabetoNuevo(String poemaPrePro) {
+        Map<Character, Character> mapaLetras = new HashMap<>();
+        mapaLetras.put('I', 'A');
+        mapaLetras.put('J', 'H');
+        mapaLetras.put('N', 'M');
+        mapaLetras.put('L', 'K');
+        mapaLetras.put('U', 'V');
+        mapaLetras.put('V', 'W');
+        mapaLetras.put('Y', 'Z');
+        mapaLetras.put('F', 'R');
+        StringBuilder resultado = new StringBuilder();
+        for (char c : poemaPrePro.toCharArray()) {
+            if (mapaLetras.containsKey(c)) {
+                resultado.append(mapaLetras.get(c));
+            } else {
+                resultado.append(c);
+            }
+        }
+        return resultado.toString();
+    }
+
+    private static String cambiarCarateresUnicode(String poemaPrePro) {
+        // Obtener bytes en UTF-8
+        byte[] bytes = poemaPrePro.getBytes(StandardCharsets.UTF_8);
+        StringBuilder resultado = new StringBuilder();
+        for (byte b : bytes) {
+            resultado.append(Integer.toHexString(b & 0xFF) + " ");
+        }
+        // Convertir bytes a caracteres en UTF-8
+        return String.valueOf(resultado);
+    }
+
+
+    private static void metodoKasiski(String poemaPrePro) {
+        Map<String, Integer> trigramas = new HashMap<>();
+        Map<String, Integer> distancias = new HashMap<>();
+
+        for (int i = 0; i < poemaPrePro.length() - 2; i++) {
+            String trigrama = poemaPrePro.substring(i, i + 3);
+            String siguienteTrigrama = poemaPrePro.substring(i + 3);
+
+            if (siguienteTrigrama.contains(trigrama)) {
+                trigramas.put(trigrama, trigramas.getOrDefault(trigrama, 1) + 1);
+
+                int distancia = siguienteTrigrama.indexOf(trigrama) + 3;
+                distancias.put(trigrama, distancia);
+            }
+        }
+
+        System.out.println("Trigramas encontrados:");
+        for (Map.Entry<String, Integer> entry : trigramas.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+
+        System.out.println("Distancias:");
+        for (Map.Entry<String, Integer> entry : distancias.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
     }
 
     private static void imprimirCaracteresDeMayorFrec(Map<Character, Integer> tablaFrecuencias) {
