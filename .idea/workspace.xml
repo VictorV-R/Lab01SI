@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="989dd75e-36d1-4fad-8e2a-5c22da010457" name="Changes" comment="Avance">
+    <list default="true" id="989dd75e-36d1-4fad-8e2a-5c22da010457" name="Changes" comment="Avance 02">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Lab01.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Lab01.java" afterDir="false" />
     </list>
@@ -70,11 +70,19 @@
       <option name="project" value="LOCAL" />
       <updated>1686882306074</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Avance 02">
+      <created>1686886129874</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686886129874</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Avance" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avance" />
+    <MESSAGE value="Avance 02" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avance 02" />
   </component>
 </project>

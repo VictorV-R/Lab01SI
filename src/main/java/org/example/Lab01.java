@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class Lab01 {
     public static void main(String[] args) {
-
         String poema = leerPoema();
         String poemaPrePro = preProcesamiento(poema);
         Map<Character, Integer> tablaFrecuencias = frecuencias(poemaPrePro);
@@ -17,7 +16,29 @@ public class Lab01 {
         metodoKasiski(poemaPrePro);
         System.out.println("Poema UNICODE: " + cambiarCarateresUnicode(poemaPrePro));
         System.out.println("Peoma Alfabeto Nuevo: " + alfabetoNuevo(poemaPrePro));
+        System.out.println("Poema insertando cadena y rellenando: " + insertarYRellenar(poemaPrePro));
+    }
 
+    private static String insertarYRellenar(String poemaPrePro) {
+        String cadenaAInsertar = "UNSA";
+        StringBuilder textoProcesado = new StringBuilder();
+        int contador = 0;
+        for (char c : poemaPrePro.toCharArray()) {
+            textoProcesado.append(c);
+            contador++;
+            // Insertar la cadena cada 26 caracteres
+            if (contador % 26 == 0) {
+                textoProcesado.append(cadenaAInsertar);
+            }
+        }
+        int caracteresFaltantes = textoProcesado.length() % 5;
+        if (caracteresFaltantes > 0) {
+            int caracteresPadding = 5 - caracteresFaltantes;
+            for (int i = 0; i < caracteresPadding; i++) {
+                textoProcesado.append('#');
+            }
+        }
+        return textoProcesado.toString();
     }
 
     private static String alfabetoNuevo(String poemaPrePro) {
@@ -46,7 +67,7 @@ public class Lab01 {
         byte[] bytes = poemaPrePro.getBytes(StandardCharsets.UTF_8);
         StringBuilder resultado = new StringBuilder();
         for (byte b : bytes) {
-            resultado.append(Integer.toHexString(b & 0xFF) + " ");
+            resultado.append(Integer.toHexString(b & 0xFF)).append(" ");
         }
         // Convertir bytes a caracteres en UTF-8
         return String.valueOf(resultado);
